@@ -2,8 +2,8 @@ from pprint import pprint
 import json
 from collections import Counter
 
-def json_top10_longest_words():
-	with open('newsafr.json', encoding='utf-8') as newsafr:
+def json_top10_longest_words(file_path):
+	with open(file_path, encoding='utf-8') as newsafr:
 		json_data = json.load(newsafr)
 	json_descriptions = list()
 	for json_item in json_data['rss']['channel']['items']:
@@ -22,9 +22,9 @@ def json_top10_longest_words():
 
 
 import xml.etree.ElementTree as ET
-def xml_top10_longest_words():
+def xml_top10_longest_words(file_path):
 	parser = ET.XMLParser(encoding = 'utf-8')
-	tree = ET.parse('newsafr.xml', parser)
+	tree = ET.parse(file_path, parser)
 	root = tree.getroot()
 	xml_descriptions = root.findall('channel/item/description')
 	xml_description_list = list()
@@ -42,6 +42,6 @@ def xml_top10_longest_words():
 	for i, xml_unit in enumerate(xml_top10):
 		print('{}. Слово "{}" встретилось в новостях {} раз'.format(i+1, xml_unit[0], xml_unit[1]))
 
-json_top10_longest_words()
+json_top10_longest_words('newsafr.json')
 print()
-xml_top10_longest_words()
+xml_top10_longest_words('newsafr.xml')
