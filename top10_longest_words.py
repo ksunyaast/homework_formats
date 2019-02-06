@@ -1,8 +1,7 @@
-from pprint import pprint
-import json
 from collections import Counter
 
 def json_top10_longest_words(file_path):
+	import json
 	with open(file_path, encoding='utf-8') as newsafr:
 		json_data = json.load(newsafr)
 	json_descriptions = list()
@@ -21,8 +20,8 @@ def json_top10_longest_words(file_path):
 		print('{}. Слово "{}" встретилось в новостях {} раз'.format(i+1, json_unit[0], json_unit[1]))
 
 
-import xml.etree.ElementTree as ET
 def xml_top10_longest_words(file_path):
+	import xml.etree.ElementTree as ET
 	parser = ET.XMLParser(encoding = 'utf-8')
 	tree = ET.parse(file_path, parser)
 	root = tree.getroot()
